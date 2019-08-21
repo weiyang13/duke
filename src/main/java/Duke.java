@@ -44,11 +44,18 @@ public class Duke {
 
     public void list() {
         printHorizontal();
+        int i = 1;
+        for (String task : taskList) {
+            printLine(i + ". " + task);
+            i++;
+        }
         printHorizontal();
     }
 
     public void add(String task) {
         printHorizontal();
+        printLine("added: " + task);
+        taskList.add(task);
         printHorizontal();
     }
 
