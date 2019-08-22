@@ -1,9 +1,11 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.lang.NumberFormatException;
+
 public class Duke {
-    ArrayList<String> taskList;
-    Scanner input;
+    protected ArrayList<Task> tasks;
+    protected Scanner input;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -18,50 +20,71 @@ public class Duke {
     }
 
     public Duke() {
-        taskList = new ArrayList<>();
+        tasks = new ArrayList<>();
         input = new Scanner(System.in);
     }
 
     public void greet() {
         printHorizontal();
-        printLine("Hello! I'm Duke");
-        printLine("What can I do for you?");
+        printWithIndentation("Hello! I'm Duke");
+        printWithIndentation("What can I do for you?");
         printHorizontal();
     }
 
     public void readCommand() {
-        String cmd = input.nextLine();
-        if (cmd.equals("bye")) {
-            bye();
-        } else if (cmd.equals("list")) {
+        String command = input.nextLine();
+        String[] commandTokens = command.split(" ");
+        if (command.equals("bye")) {
+            exit();
+        } else if (command.equals("list")) {
             list();
             readCommand();
-        } else {
-            add(cmd);
+        } else if (commandTokens[0].equals("done")) {
+            markAsDone(commandTokens);
             readCommand();
+        } else {
+            add(command);
+            readCommand();
+        }
+    }
+
+    public void markAsDone(String[] commandTokens) {
+        try {
+            int itemNo = Integer.parseInt(commandTokens[1]);
+            Task task = tasks.get(itemNo - 1);
+            task.setIsDone(true);
+            printHorizontal();
+            printWithIndentation("Nice! I've marked this task as done:");
+            printWithIndentation("  " + task);
+            printHorizontal();
+        } catch (NumberFormatException e) {
+            printHorizontal();
+            printWithIndentation(e.toString());
+            printHorizontal();
         }
     }
 
     public void list() {
         printHorizontal();
         int i = 1;
-        for (String task : taskList) {
-            printLine(i + ". " + task);
+        String output = "";
+        for (Task task : tasks) {
+            printWithIndentation(i + ". " + task);
             i++;
         }
         printHorizontal();
     }
 
-    public void add(String task) {
+    public void add(String taskDescription) {
+        tasks.add(new Task(taskDescription));
         printHorizontal();
-        printLine("added: " + task);
-        taskList.add(task);
+        printWithIndentation("added: " + taskDescription);
         printHorizontal();
     }
 
-    public void bye() {
+    public void exit() {
         printHorizontal();
-        printLine("Bye. Hope to see you again soon!");
+        printWithIndentation("Bye. Hope to see you again soon!");
         printHorizontal();
     }
 
@@ -69,7 +92,7 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
-    public void printLine(String output) {
+    public void printWithIndentation(String output) {
         System.out.println("     " + output);
     }
 }
