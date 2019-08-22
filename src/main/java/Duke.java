@@ -77,7 +77,11 @@ public class Duke {
         printHorizontal();
     }
 
-    public void addToDo(String[] commandTokens) {
+    public void addToDo(String[] commandTokens) throws DukeException {
+        if (commandTokens.length == 1) {
+            throw new DukeException("OOPS! Description for todo must not be empty :(");
+        }
+
         String description = "";
         for (int i = 1; i < commandTokens.length; i++) {
             description += commandTokens[i] + " ";
@@ -88,7 +92,11 @@ public class Duke {
         addTask(task);
     }
 
-    public void addDeadline(String[] commandTokens) {
+    public void addDeadline(String[] commandTokens) throws DukeException {
+        if (commandTokens.length == 1 || commandTokens[1].equals("/by")) {
+            throw new DukeException("OOPS! Description for deadline must not be empty :(");
+        }
+
         String description = "";
         String by = "";
         int i;
@@ -100,6 +108,12 @@ public class Duke {
         }
         description = description.substring(0, description.length() - 1);
 
+        if (i == commandTokens.length) {
+            throw new DukeException("OOPS! Indicate date/time for deadline with '/by/' :(");
+        } else if (i == commandTokens.length - 1) {
+            throw new DukeException("OOPS! Date/time for deadline must not be empty :(");
+        }
+
         for (i++; i < commandTokens.length; i++) {
             by += commandTokens[i] + " ";
         }
@@ -109,7 +123,11 @@ public class Duke {
         addTask(task);
     }
 
-    public void addEvent(String[] commandTokens) {
+    public void addEvent(String[] commandTokens) throws DukeException {
+        if (commandTokens.length == 1 || commandTokens[1].equals("/at")) {
+            throw new DukeException("OOPS! Description for event must not be empty :(");
+        }
+
         String description = "";
         String at = "";
         int i;
@@ -120,6 +138,12 @@ public class Duke {
             description += commandTokens[i] + " ";
         }
         description = description.substring(0, description.length() - 1);
+
+        if (i == commandTokens.length) {
+            throw new DukeException("OOPS! Indicate date/time for event with '/at/' :(");
+        } else if (i == commandTokens.length - 1) {
+            throw new DukeException("OOPS! Date/time for event must not be empty :(");
+        }
 
         for (i++; i < commandTokens.length; i++) {
             at += commandTokens[i] + " ";
@@ -165,7 +189,7 @@ public class Duke {
     }
 
     public void printHorizontal() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    ______________________________________________________________________");
     }
 
     public void printWithIndentation(String output) {
