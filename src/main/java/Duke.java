@@ -39,13 +39,47 @@ public class Duke {
         } else if (command.equals("list")) {
             list();
             readCommand();
-        } else if (commandTokens[0].equals("done")) {
-            markAsDone(commandTokens);
-            readCommand();
         } else {
-            add(command);
+            switch (commandTokens[0]) {
+            case "done":
+                markAsDone(commandTokens);
+                break;
+            case "todo":
+                addToDo(commandTokens);
+                break;
+            case "deadline":
+                addDeadline(commandTokens);
+                break;
+            case "event":
+                addEvent(commandTokens);
+                break;
+            }
             readCommand();
         }
+    }
+
+    public void addToDo(String[] commandTokens) {
+        String description = "";
+        for (int i = 1; i < commandTokens.length; i++) {
+            description += commandTokens[i] + " ";
+        }
+        description = description.substring(0, description.length() - 1);
+        Task task = new ToDo(description);
+        tasks.add(task);
+        printHorizontal();
+        printWithIndentation("Got it. I've added this task:");
+        printWithIndentation("  " + task);
+        printWithIndentation("Now you have " + tasks.size() +
+                " in the list.");
+        printHorizontal();
+    }
+
+    public void addDeadline(String[] commandTokens) {
+
+    }
+
+    public void addEvent(String[] commandTokens){
+
     }
 
     public void markAsDone(String[] commandTokens) {
@@ -75,12 +109,6 @@ public class Duke {
         printHorizontal();
     }
 
-    public void add(String taskDescription) {
-        tasks.add(new Task(taskDescription));
-        printHorizontal();
-        printWithIndentation("added: " + taskDescription);
-        printHorizontal();
-    }
 
     public void exit() {
         printHorizontal();
