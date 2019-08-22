@@ -38,12 +38,15 @@ public class Duke {
             if (command.equals("bye")) {
                 exit();
             } else if (command.equals("list")) {
-                list();
+                listTasks();
                 readCommand();
             } else {
                 switch (commandTokens[0]) {
                 case "done":
                     markAsDone(commandTokens);
+                    break;
+                case "delete":
+                    deleteItem(commandTokens);
                     break;
                 case "todo":
                     addToDo(commandTokens);
@@ -156,13 +159,13 @@ public class Duke {
 
     public void markAsDone(String[] commandTokens) throws DukeException {
         if (commandTokens.length != 2) {
-            throw new DukeException("OOPS! 'done' command must be followed by a single integer :(");
+            throw new DukeException("OOPS! 'done' must be followed by an integer :(");
         }
 
         try {
             int itemNo = Integer.parseInt(commandTokens[1]);
             if (itemNo > tasks.size() || itemNo < 1) {
-                throw new DukeException("OOPS! Invalid item number for 'done' command :(");
+                throw new DukeException("OOPS! Invalid task number for 'done' command :(");
             }
 
             Task task = tasks.get(itemNo - 1);
@@ -176,11 +179,35 @@ public class Duke {
             printWithIndentation("  " + task);
             printHorizontal();
         } catch (NumberFormatException e) {
-            throw new DukeException("OOPS! 'done' command must be followed by a single integer :(");
+            throw new DukeException("OOPS! 'done' must be followed by an integer :(");
         }
     }
 
-    public void list() throws DukeException {
+    public void deleteItem(String[] commandTokens) throws DukeException {
+        if (commandTokens.length != 2) {
+            throw new DukeException("OOPS! 'delete' must be followed by an integer :(");
+        }
+
+        try {
+            int itemNo = Integer.parseInt(commandTokens[1]);
+            if (itemNo > tasks.size() || itemNo < 1) {
+                throw new DukeException("OOPS! Invalid task number for 'delete' command :(");
+            }
+
+            Task task = tasks.get(itemNo - 1);
+            tasks.remove(itemNo - 1);
+
+            printHorizontal();
+            printWithIndentation("Noted. I've removed this task:");
+            printWithIndentation("  " + task);
+            printWithIndentation("Now you have " + tasks.size() + " tasks in the list.");
+            printHorizontal();
+        } catch (NumberFormatException e) {
+            throw new DukeException("OOPS! 'delete' must be followed by an integer :(");
+        }
+    }
+
+    public void listTasks() throws DukeException {
         if (tasks.size() == 0) {
             throw new DukeException("OOPS! You have no tasks to display :(");
         }
