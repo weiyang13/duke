@@ -154,19 +154,29 @@ public class Duke {
         addTask(task);
     }
 
-    public void markAsDone(String[] commandTokens) {
+    public void markAsDone(String[] commandTokens) throws DukeException {
+        if (commandTokens.length != 2) {
+            throw new DukeException("OOPS! 'done' command must be followed by a single integer :(");
+        }
+
         try {
             int itemNo = Integer.parseInt(commandTokens[1]);
+            if (itemNo > tasks.size() || itemNo < 1) {
+                throw new DukeException("OOPS! Invalid item number for 'done' command :(");
+            }
+
             Task task = tasks.get(itemNo - 1);
+            if (task.getIsDone()) {
+                throw new DukeException("OOPS! Task " + itemNo + " is already done :(");
+            }
             task.setIsDone(true);
+
             printHorizontal();
             printWithIndentation("Nice! I've marked this task as done:");
             printWithIndentation("  " + task);
             printHorizontal();
         } catch (NumberFormatException e) {
-            printHorizontal();
-            printWithIndentation(e.toString());
-            printHorizontal();
+            throw new DukeException("OOPS! 'done' command must be followed by a single integer :(");
         }
     }
 
