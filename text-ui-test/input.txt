@@ -1,0 +1,12 @@
+event gym /at never
+deadline cs2103t project /by TODAY OMG
+todo live a good life
+list
+done 2
+list
+done 2
+list
+done 1
+done 3
+list
+bye
