@@ -58,6 +58,16 @@ public class Duke {
         }
     }
 
+    public void addTask(Task task) {
+        tasks.add(task);
+        printHorizontal();
+        printWithIndentation("Got it. I've added this task:");
+        printWithIndentation("  " + task);
+        printWithIndentation("Now you have " + tasks.size() +
+                " in the list.");
+        printHorizontal();
+    }
+
     public void addToDo(String[] commandTokens) {
         String description = "";
         for (int i = 1; i < commandTokens.length; i++) {
@@ -66,14 +76,7 @@ public class Duke {
         description = description.substring(0, description.length() - 1);
 
         Task task = new ToDo(description);
-        tasks.add(task);
-
-        printHorizontal();
-        printWithIndentation("Got it. I've added this task:");
-        printWithIndentation("  " + task);
-        printWithIndentation("Now you have " + tasks.size() +
-                " in the list.");
-        printHorizontal();
+        addTask(task);
     }
 
     public void addDeadline(String[] commandTokens) {
@@ -94,18 +97,28 @@ public class Duke {
         by = by.substring(0, by.length() - 1);
 
         Task task = new Deadline(description, by);
-        tasks.add(task);
-
-        printHorizontal();
-        printWithIndentation("Got it. I've added this task:");
-        printWithIndentation("  " + task);
-        printWithIndentation("Now you have " + tasks.size() +
-                " in the list.");
-        printHorizontal();
+        addTask(task);
     }
 
     public void addEvent(String[] commandTokens){
+        String description = "";
+        String at = "";
+        int i;
+        for (i = 1; i < commandTokens.length; i++) {
+            if (commandTokens[i].equals("/at")) {
+                break;
+            }
+            description += commandTokens[i] + " ";
+        }
+        description = description.substring(0, description.length() - 1);
 
+        for (i++; i < commandTokens.length; i++) {
+            at += commandTokens[i] + " ";
+        }
+        at = at.substring(0, at.length() - 1);
+
+        Task task = new Event(description, at);
+        addTask(task);
     }
 
     public void markAsDone(String[] commandTokens) {
