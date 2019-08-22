@@ -142,7 +142,7 @@ public class Duke {
         int i = 1;
         String output = "";
         for (Task task : tasks) {
-            printWithIndentation(i + ". " + task);
+            printWithIndentation(i + "." + task);
             i++;
         }
         printHorizontal();
