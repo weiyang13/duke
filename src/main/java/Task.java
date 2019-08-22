@@ -7,15 +7,15 @@ class Task {
         isDone = false;
     }
 
-    public void markAsDone() {
-        isDone = true;
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
         if (isDone) {
-            return "\u2713";
+            return "+";
         } else {
-            return "\u2718";
+            return "-";
         }
     }
 
