@@ -64,8 +64,10 @@ public class Duke {
             description += commandTokens[i] + " ";
         }
         description = description.substring(0, description.length() - 1);
+
         Task task = new ToDo(description);
         tasks.add(task);
+
         printHorizontal();
         printWithIndentation("Got it. I've added this task:");
         printWithIndentation("  " + task);
@@ -75,7 +77,31 @@ public class Duke {
     }
 
     public void addDeadline(String[] commandTokens) {
+        String description = "";
+        String by = "";
+        int i;
+        for (i = 1; i < commandTokens.length; i++) {
+            if (commandTokens[i].equals("/by")) {
+                break;
+            }
+            description += commandTokens[i] + " ";
+        }
+        description = description.substring(0, description.length() - 1);
 
+        for (i++; i < commandTokens.length; i++) {
+            by += commandTokens[i] + " ";
+        }
+        by = by.substring(0, by.length() - 1);
+
+        Task task = new Deadline(description, by);
+        tasks.add(task);
+
+        printHorizontal();
+        printWithIndentation("Got it. I've added this task:");
+        printWithIndentation("  " + task);
+        printWithIndentation("Now you have " + tasks.size() +
+                " in the list.");
+        printHorizontal();
     }
 
     public void addEvent(String[] commandTokens){
