@@ -32,28 +32,37 @@ public class Duke {
     }
 
     public void readCommand() {
-        String command = input.nextLine();
-        String[] commandTokens = command.split(" ");
-        if (command.equals("bye")) {
-            exit();
-        } else if (command.equals("list")) {
-            list();
-            readCommand();
-        } else {
-            switch (commandTokens[0]) {
-            case "done":
-                markAsDone(commandTokens);
-                break;
-            case "todo":
-                addToDo(commandTokens);
-                break;
-            case "deadline":
-                addDeadline(commandTokens);
-                break;
-            case "event":
-                addEvent(commandTokens);
-                break;
+        try {
+            String command = input.nextLine();
+            String[] commandTokens = command.split(" ");
+            if (command.equals("bye")) {
+                exit();
+            } else if (command.equals("list")) {
+                list();
+                readCommand();
+            } else {
+                switch (commandTokens[0]) {
+                case "done":
+                    markAsDone(commandTokens);
+                    break;
+                case "todo":
+                    addToDo(commandTokens);
+                    break;
+                case "deadline":
+                    addDeadline(commandTokens);
+                    break;
+                case "event":
+                    addEvent(commandTokens);
+                    break;
+                default:
+                    throw new DukeException("OOPS!! Sorry, I do not know what that means :(");
+                }
+                readCommand();
             }
+        } catch (DukeException e) {
+            printHorizontal();
+            printWithIndentation(e.toString());
+            printHorizontal();
             readCommand();
         }
     }
@@ -100,7 +109,7 @@ public class Duke {
         addTask(task);
     }
 
-    public void addEvent(String[] commandTokens){
+    public void addEvent(String[] commandTokens) {
         String description = "";
         String at = "";
         int i;
