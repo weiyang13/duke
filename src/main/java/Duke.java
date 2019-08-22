@@ -180,10 +180,13 @@ public class Duke {
         }
     }
 
-    public void list() {
+    public void list() throws DukeException {
+        if (tasks.size() == 0) {
+            throw new DukeException("OOPS! You have no tasks to display :(");
+        }
+
         printHorizontal();
         int i = 1;
-        String output = "";
         for (Task task : tasks) {
             printWithIndentation(i + "." + task);
             i++;
