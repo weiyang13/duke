@@ -1,6 +1,7 @@
 abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected TaskType taskType;
 
     public Task(String description) {
         this.description = description;
@@ -23,8 +24,12 @@ abstract class Task {
         }
     }
 
+    public TaskType getTaskType() {
+        return taskType;
+    }
+
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return taskType + "[" + getStatusIcon() + "] " + description;
     }
 }
