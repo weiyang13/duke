@@ -75,47 +75,6 @@ import java.lang.NumberFormatException;
         printHorizontal();
     }
 
-    public void load() {
-        try {
-            Scanner fileReader = new Scanner(storageFile);
-            while (fileReader.hasNextLine()) {
-                String taskLine = fileReader.nextLine();
-                String[] taskTokens = taskLine.split("::");
-                Task task;
-                switch (taskTokens[0]) {
-                case "[T]":
-                    task = new ToDo(taskTokens[2]);
-                    if (taskTokens[1].equals("1")) {
-                        task.setIsDone(true);
-                    }
-                    tasks.add(task);
-                    break;
-                case "[D]":
-                    task = new Deadline(taskTokens[2], taskTokens[3]);
-                    if (taskTokens[1].equals("1")) {
-                        task.setIsDone(true);
-                    }
-                    tasks.add(task);
-                    break;
-                case "[E]":
-                    task = new Event(taskTokens[2], taskTokens[3]);
-                    if (taskTokens[1].equals("1")) {
-                        task.setIsDone(true);
-                    }
-                    tasks.add(task);
-                    break;
-                }
-
-            }
-        } catch (FileNotFoundException e) {
-            try {
-                storageFile.createNewFile();
-            } catch (IOException ex) {
-                System.out.println(ex);
-            }
-        } catch (DukeException e) {
-        }
-    }
 
     public void readCommand() {
         try {

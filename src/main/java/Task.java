@@ -3,14 +3,17 @@ import java.text.SimpleDateFormat;
 abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected boolean hasDate;
     protected TaskType taskType;
-    protected SimpleDateFormat dateFormat;
+
 
     public Task(String description) {
         this.description = description;
         isDone = false;
-        dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        hasDate = false;
     }
+
+    public boolean getHasDate() { return hasDate; }
 
     public boolean getIsDone() {
         return isDone;
@@ -22,6 +25,10 @@ abstract class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getDate() {
+        return "";
     }
 
     public String getStatusIcon() {
