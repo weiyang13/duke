@@ -8,6 +8,7 @@ public class Ui {
     }
 
     public void showLoadingError() {
+        System.out.println("LOADING ERROR. Creating new storage file.");
     }
 
     public void showWelcome() {
@@ -29,8 +30,8 @@ public class Ui {
         printLine("OOPS!!! " + message + " :( :(");
     }
 
-    public void printLine(Object object) {
-        System.out.println("     " + object.toString());
+    public void printLine(String string) {
+        System.out.println("     " + string);
     }
 
     public String readCommand() {
