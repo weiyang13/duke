@@ -7,6 +7,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 
 public class Parser {
@@ -22,6 +23,8 @@ public class Parser {
                 return parseDone(commandTokens);
             case "delete":
                 return parseDelete(commandTokens);
+            case "find":
+                return parseFind(commandTokens);
             case "todo":
                 return parseToDo(commandTokens);
             case "deadline":
@@ -32,6 +35,14 @@ public class Parser {
                 throw new DukeException("Unrecognised command.");
             }
         }
+    }
+
+    public static Command parseFind(String[] commandTokens) throws DukeException {
+        if (commandTokens.length != 2) {
+            throw new DukeException("'done' command must be followed by a single keyword.");
+        }
+
+        return new FindCommand(commandTokens[1]);
     }
 
     public static Command parseDone(String[] commandTokens) throws DukeException {
