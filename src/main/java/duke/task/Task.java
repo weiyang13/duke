@@ -94,6 +94,22 @@ public abstract class Task {
         return taskType;
     }
 
+    /**
+     * Returns true if description of task contains a keyword.
+     *
+     * @param keyword Keyword to be searched.
+     * @return True if description of task contains keyword, false otherwise.
+     */
+    public boolean containsKeyword(String keyword) {
+        String[] tokens = description.split(" ");
+        for (String token : tokens) {
+            if (token.equals(keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return taskType + "[" + getStatusIcon() + "] " + description;

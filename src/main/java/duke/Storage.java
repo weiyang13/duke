@@ -42,24 +42,25 @@ public class Storage {
             while (fileReader.hasNextLine()) {
                 String taskLine = fileReader.nextLine();
                 String[] taskTokens = taskLine.split("::");
+                Task task;
 
                 switch (taskTokens[0]) {
                 case "[T]":
-                    Task task = new ToDo(taskTokens[2]);
+                    task = new ToDo(taskTokens[2]);
                     if (taskTokens[1].equals("1")) {
                         task.setIsDone(true);
                     }
                     tasks.add(task);
                     break;
                 case "[D]":
-                    Task task = new Deadline(taskTokens[2], taskTokens[3]);
+                    task = new Deadline(taskTokens[2], taskTokens[3]);
                     if (taskTokens[1].equals("1")) {
                         task.setIsDone(true);
                     }
                     tasks.add(task);
                     break;
                 case "[E]":
-                    Task task = new Event(taskTokens[2], taskTokens[3]);
+                    task = new Event(taskTokens[2], taskTokens[3]);
                     if (taskTokens[1].equals("1")) {
                         task.setIsDone(true);
                     }
