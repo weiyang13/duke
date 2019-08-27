@@ -9,7 +9,18 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
 
+/**
+ * Encapsulates the unit that parses user inputs.
+ */
+
 public class Parser {
+    /**
+     * Parses a user input command as a Command object.
+     *
+     * @param fullCommand String containing a command that is input by user.
+     * @return A Command object that corresponds to fullCommand.
+     * @throws DukeException If fullCommand is not properly formatted.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] commandTokens = fullCommand.split(" ");
         if (fullCommand.equals("bye")) {
@@ -34,6 +45,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses whitespace delimited tokens of a user input command beginning with "done" into a command.
+     *
+     * @param commandTokens Array of whitespace delimited String tokens from user input command.
+     * @return A Command object that corresponds to fullCommand.
+     * @throws DukeException If format of commandTokens does not match expected format.
+     */
     public static Command parseDone(String[] commandTokens) throws DukeException {
         if (commandTokens.length != 2) {
             throw new DukeException("'done' command must be followed by an integer.");
@@ -46,6 +64,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses whitespace delimited tokens of a user input command beginning with "delete" into a command.
+     *
+     * @param commandTokens Array of whitespace delimited String tokens from user input command.
+     * @return A Command object that corresponds to fullCommand.
+     * @throws DukeException If format of commandTokens does not match expected format.
+     */
     public static Command parseDelete(String[] commandTokens) throws DukeException {
         if (commandTokens.length != 2) {
             throw new DukeException("'delete' command must be followed by an integer.");
@@ -58,6 +83,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses whitespace delimited tokens of a user input command beginning with "deadline" into a command.
+     *
+     * @param commandTokens Array of whitespace delimited String tokens from user input command.
+     * @return A Command object that corresponds to fullCommand.
+     * @throws DukeException If format of commandTokens does not match expected format.
+     */
     public static Command parseDeadline(String[] commandTokens) throws DukeException {
         if (commandTokens.length == 1 || commandTokens[1].equals("/by")) {
             throw new DukeException("Description for deadline must not be empty.");
@@ -83,6 +115,13 @@ public class Parser {
         return new AddDeadlineCommand(description, by);
     }
 
+    /**
+     * Parses whitespace delimited tokens of a user input command beginning with "event" into a command.
+     *
+     * @param commandTokens Array of whitespace delimited String tokens from user input command.
+     * @return A Command object that corresponds to fullCommand.
+     * @throws DukeException If format of commandTokens does not match expected format.
+     */
     public static Command parseEvent(String[] commandTokens) throws DukeException {
         if (commandTokens.length == 1 || commandTokens[1].equals("/at")) {
             throw new DukeException("Description for deadline must not be empty.");
@@ -108,6 +147,13 @@ public class Parser {
         return new AddEventCommand(description, at);
     }
 
+    /**
+     * Parses whitespace delimited tokens of a user input command beginning with "todo" into a command.
+     *
+     * @param commandTokens Array of whitespace delimited String tokens from user input command.
+     * @return A Command object that corresponds to fullCommand.
+     * @throws DukeException If format of commandTokens does not match expected format.
+     */
     public static Command parseToDo(String[] commandTokens) throws DukeException {
         if (commandTokens.length == 1) {
             throw new DukeException("Description for todo must not be empty.");
