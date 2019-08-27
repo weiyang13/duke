@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
-    Scanner input;
+    private Scanner input;
 
     public Ui() {
         input = new Scanner(System.in);
