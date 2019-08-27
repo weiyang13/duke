@@ -77,6 +77,7 @@ public class Duke {
             } catch (IOException ex) {
                 System.out.println(ex);
             }
+        } catch (DukeException e) {
         }
     }
 

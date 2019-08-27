@@ -1,18 +1,25 @@
-class Event extends Task {
-    protected String at;
+import java.text.ParseException;
+import java.util.Date;
 
-    public Event (String description, String at) {
+class Event extends Task {
+    protected Date at;
+
+    public Event (String description, String at) throws DukeException {
         super(description);
-        this.at = at;
+        try {
+            this.at = dateFormat.parse(at);
+        } catch (ParseException e) {
+            throw new DukeException("Date must be of format dd/MM/yyyy HHmm");
+        }
         taskType = TaskType.EVENT;
     }
 
     public String getAt() {
-        return at;
+        return dateFormat.format(at);
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + dateFormat.format(at) + ")";
     }
 }

@@ -1,18 +1,25 @@
-class Deadline extends Task {
-    protected String by;
+import java.text.ParseException;
+import java.util.Date;
 
-    public Deadline (String description, String by) {
+class Deadline extends Task {
+    protected Date by;
+
+    public Deadline (String description, String by) throws DukeException {
         super(description);
-        this.by = by;
+        try {
+            this.by = dateFormat.parse(by);
+        } catch (ParseException e) {
+            throw new DukeException("Date must be of format dd/MM/yyyy HHmm");
+        }
         taskType = TaskType.DEADLINE;
     }
 
     public String getBy() {
-        return by;
+        return dateFormat.format(by);
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + dateFormat.format(by) + ")";
     }
 }
