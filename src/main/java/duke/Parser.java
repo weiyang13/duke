@@ -29,7 +29,7 @@ public class Parser {
             case "event":
                 return parseEvent(commandTokens);
             default:
-                throw new DukeException("Sorry, I do not know what that means.");
+                throw new DukeException("Unrecognised command.");
             }
         }
     }
