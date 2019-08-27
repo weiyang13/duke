@@ -7,6 +7,10 @@ class Deadline extends Task {
         taskType = TaskType.DEADLINE;
     }
 
+    public String getBy() {
+        return by;
+    }
+
     @Override
     public String toString() {
         return super.toString() + " (by: " + by + ")";

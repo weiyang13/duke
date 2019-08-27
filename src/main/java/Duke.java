@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 
 import java.lang.NumberFormatException;
 
@@ -43,7 +44,7 @@ public class Duke {
             Scanner fileReader = new Scanner(storageFile);
             while (fileReader.hasNextLine()) {
                 String taskLine = fileReader.nextLine();
-                String[] taskTokens = taskLine.split(" | ");
+                String[] taskTokens = taskLine.split("::");
                 Task task;
                 switch (taskTokens[0]) {
                 case "[T]":
@@ -51,23 +52,24 @@ public class Duke {
                     if (taskTokens[1].equals("1")) {
                         task.setIsDone(true);
                     }
-                    addTask(task);
+                    tasks.add(task);
                     break;
                 case "[D]":
                     task = new Deadline(taskTokens[2], taskTokens[3]);
                     if (taskTokens[1].equals("1")) {
                         task.setIsDone(true);
                     }
-                    addTask(task);
+                    tasks.add(task);
                     break;
                 case "[E]":
                     task = new Event(taskTokens[2], taskTokens[3]);
                     if (taskTokens[1].equals("1")) {
                         task.setIsDone(true);
                     }
-                    addTask(task);
+                    tasks.add(task);
                     break;
                 }
+
             }
         } catch (FileNotFoundException e) {
             try {
@@ -123,7 +125,31 @@ public class Duke {
     }
 
     public void save() {
-        
+        try {
+            FileWriter fileWriter = new FileWriter(storageFile);
+            for (Task task : tasks) {
+                fileWriter.write(task.getTaskType().toString());
+                fileWriter.write("::");
+                if (task.getIsDone()) {
+                    fileWriter.write("1::");
+                } else {
+                    fileWriter.write("0::");
+                }
+                fileWriter.write(task.getDescription());
+                if (task.taskType.equals(TaskType.DEADLINE)) {
+                    fileWriter.write("::");
+                    fileWriter.write(((Deadline) task).getBy());
+                } else if (task.taskType.equals(TaskType.EVENT)) {
+                    fileWriter.write("::");
+                    fileWriter.write(((Event) task).getAt());
+                }
+                fileWriter.write("\n");
+            }
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.print(e);
+        }
     }
 
     public void addTask(Task task) {

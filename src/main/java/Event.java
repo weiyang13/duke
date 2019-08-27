@@ -7,6 +7,10 @@ class Event extends Task {
         taskType = TaskType.EVENT;
     }
 
+    public String getAt() {
+        return at;
+    }
+
     @Override
     public String toString() {
         return super.toString() + " (at: " + at + ")";
