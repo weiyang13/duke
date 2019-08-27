@@ -26,24 +26,24 @@ public class Storage {
             while (fileReader.hasNextLine()) {
                 String taskLine = fileReader.nextLine();
                 String[] taskTokens = taskLine.split("::");
-                Task task;
+
                 switch (taskTokens[0]) {
                 case "[T]":
-                    task = new ToDo(taskTokens[2]);
+                    Task task = new ToDo(taskTokens[2]);
                     if (taskTokens[1].equals("1")) {
                         task.setIsDone(true);
                     }
                     tasks.add(task);
                     break;
                 case "[D]":
-                    task = new Deadline(taskTokens[2], taskTokens[3]);
+                    Task task = new Deadline(taskTokens[2], taskTokens[3]);
                     if (taskTokens[1].equals("1")) {
                         task.setIsDone(true);
                     }
                     tasks.add(task);
                     break;
                 case "[E]":
-                    task = new Event(taskTokens[2], taskTokens[3]);
+                    Task task = new Event(taskTokens[2], taskTokens[3]);
                     if (taskTokens[1].equals("1")) {
                         task.setIsDone(true);
                     }
@@ -59,9 +59,9 @@ public class Storage {
             } catch (IOException ex) {
                 throw new DukeException("");
             }
-        } finally {
-            return tasks;
         }
+
+        return tasks;
     }
 
     public void save(TaskList taskList) throws DukeException {

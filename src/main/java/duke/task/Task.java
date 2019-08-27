@@ -15,7 +15,9 @@ public abstract class Task {
         hasDate = false;
     }
 
-    public boolean getHasDate() { return hasDate; }
+    public boolean getHasDate() {
+        return hasDate;
+    }
 
     public boolean getIsDone() {
         return isDone;
