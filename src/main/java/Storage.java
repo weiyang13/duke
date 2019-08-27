@@ -6,15 +6,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private String filePath;
     private File file;
 
     public Storage(String filePath) {
-        this.filePath = filePath;
         file = new File(filePath);
     }
 
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner fileReader = new Scanner(file);
@@ -47,20 +45,21 @@ public class Storage {
                 }
 
             }
+            return tasks;
         } catch (FileNotFoundException e) {
             try {
                 file.createNewFile();
             } catch (IOException ex) {
-
+                throw new DukeException("");
             }
-        } catch (DukeException e) {
         }
     }
 
-    public void save(ArrayList<Task> tasks) {
+    public void save(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);
-            for (Task task : tasks) {
+            for (int i = 1; i <= taskList.getNumTasks(); i++) {
+                Task task = taskList.getTask(i);
                 fileWriter.write(task.getTaskType().toString());
                 fileWriter.write("::");
                 if (task.getIsDone()) {
@@ -78,7 +77,7 @@ public class Storage {
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
-            System.out.print(e);
+            throw new DukeException(e.getMessage());
         }
 
     }
