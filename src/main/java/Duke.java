@@ -37,116 +37,7 @@ public class Duke {
     }
 }
 
-    /*
-import java.util.Scanner;
-import java.util.ArrayList;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-
-import java.lang.NumberFormatException;
-
-
-
-    protected ArrayList<Task> tasks;
-    protected Scanner input;
-    protected File storageFile;
-
-    public static void main(String[] args) {
-
-        Duke duke = new Duke();
-        duke.greet();
-        duke.load();
-        duke.readCommand();
-    }
-
-    public Duke() {
-        tasks = new ArrayList<>();
-        input = new Scanner(System.in);
-        storageFile = new File("../../../data/duke.txt");
-    }
-
-    public void greet() {
-        printHorizontal();
-        printWithIndentation("Hello! I'm Duke");
-        printWithIndentation("What can I do for you?");
-        printHorizontal();
-    }
-
-
-    public void readCommand() {
-        try {
-            String command = input.nextLine();
-            String[] commandTokens = command.split(" ");
-            if (command.equals("bye")) {
-                exit();
-            } else if (command.equals("list")) {
-                listTasks();
-                readCommand();
-            } else {
-                switch (commandTokens[0]) {
-                case "done":
-                    markAsDone(commandTokens);
-                    save();
-                    break;
-                case "delete":
-                    deleteItem(commandTokens);
-                    save();
-                    break;
-                case "todo":
-                    addToDo(commandTokens);
-                    save();
-                    break;
-                case "deadline":
-                    addDeadline(commandTokens);
-                    save();
-                    break;
-                case "event":
-                    addEvent(commandTokens);
-                    save();
-                    break;
-                default:
-                    throw new DukeException("OOPS!! Sorry, I do not know what that means :(");
-                }
-                readCommand();
-            }
-        } catch (DukeException e) {
-            printHorizontal();
-            printWithIndentation(e.toString());
-            printHorizontal();
-            readCommand();
-        }
-    }
-
-    public void save() {
-        try {
-            FileWriter fileWriter = new FileWriter(storageFile);
-            for (Task task : tasks) {
-                fileWriter.write(task.getTaskType().toString());
-                fileWriter.write("::");
-                if (task.getIsDone()) {
-                    fileWriter.write("1::");
-                } else {
-                    fileWriter.write("0::");
-                }
-                fileWriter.write(task.getDescription());
-                if (task.taskType.equals(TaskType.DEADLINE)) {
-                    fileWriter.write("::");
-                    fileWriter.write(((Deadline) task).getBy());
-                } else if (task.taskType.equals(TaskType.EVENT)) {
-                    fileWriter.write("::");
-                    fileWriter.write(((Event) task).getAt());
-                }
-                fileWriter.write("\n");
-            }
-            fileWriter.flush();
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.print(e);
-        }
-    }
+/*
 
     public void addTask(Task task) {
         tasks.add(task);
@@ -235,32 +126,6 @@ import java.lang.NumberFormatException;
         addTask(task);
     }
 
-    public void markAsDone(String[] commandTokens) throws DukeException {
-        if (commandTokens.length != 2) {
-            throw new DukeException("OOPS! 'done' must be followed by an integer :(");
-        }
-
-        try {
-            int itemNo = Integer.parseInt(commandTokens[1]);
-            if (itemNo > tasks.size() || itemNo < 1) {
-                throw new DukeException("OOPS! Invalid task number for 'done' command :(");
-            }
-
-            Task task = tasks.get(itemNo - 1);
-            if (task.getIsDone()) {
-                throw new DukeException("OOPS! Task " + itemNo + " is already done :(");
-            }
-            task.setIsDone(true);
-
-            printHorizontal();
-            printWithIndentation("Nice! I've marked this task as done:");
-            printWithIndentation("  " + task);
-            printHorizontal();
-        } catch (NumberFormatException e) {
-            throw new DukeException("OOPS! 'done' must be followed by an integer :(");
-        }
-    }
-
     public void deleteItem(String[] commandTokens) throws DukeException {
         if (commandTokens.length != 2) {
             throw new DukeException("OOPS! 'delete' must be followed by an integer :(");
@@ -272,13 +137,7 @@ import java.lang.NumberFormatException;
                 throw new DukeException("OOPS! Invalid task number for 'delete' command :(");
             }
 
-            Task task = tasks.get(itemNo - 1);
-            tasks.remove(itemNo - 1);
 
-            printHorizontal();
-            printWithIndentation("Noted. I've removed this task:");
-            printWithIndentation("  " + task);
-            printWithIndentation("Now you have " + tasks.size() + " tasks in the list.");
             printHorizontal();
         } catch (NumberFormatException e) {
             throw new DukeException("OOPS! 'delete' must be followed by an integer :(");
@@ -297,20 +156,5 @@ import java.lang.NumberFormatException;
             i++;
         }
         printHorizontal();
-    }
-
-
-    public void exit() {
-        printHorizontal();
-        printWithIndentation("Bye. Hope to see you again soon!");
-        printHorizontal();
-    }
-
-    public void printHorizontal() {
-        System.out.println("    ______________________________________________________________________");
-    }
-
-    public void printWithIndentation(String output) {
-        System.out.println("     " + output);
     }
     */

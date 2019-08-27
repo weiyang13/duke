@@ -1,4 +1,11 @@
-package PACKAGE_NAME;
+public class ExitCommand extends Command {
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.printLine("Bye. Hope to see you again soon!");
+    }
 
-public class ExitCommand {
+    @Override
+    public boolean isExit() {
+        return true;
+    }
 }
