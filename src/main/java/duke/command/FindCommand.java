@@ -22,6 +22,16 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Executes a command to find commands with a keyword.
+     * Searches list of tasks to find commands with keyword.
+     * Prints a message to the user indicating successful search, and list of tasks found.
+     *
+     * @param tasks List of tasks kept tracked of by Duke.
+     * @param ui Unit that manages user interface of Duke.
+     * @param storage Unit that manages saved data of Duke.
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int numTasks = tasks.getNumTasks();

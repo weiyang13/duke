@@ -48,6 +48,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses whitespace delimited tokens of a user input command beginning with "find" into a command.
+     *
+     * @param commandTokens Array of whitespace delimited String tokens from user input command.
+     * @return A Command object that corresponds to fullCommand.
+     * @throws DukeException If format of commandTokens does not match expected format.
+     */
     public static Command parseFind(String[] commandTokens) throws DukeException {
         if (commandTokens.length != 2) {
             throw new DukeException("'done' command must be followed by a single keyword.");
