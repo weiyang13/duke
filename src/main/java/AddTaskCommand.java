@@ -8,11 +8,11 @@ public abstract class AddTaskCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = createTask();
-        tasks.add(task);
+        tasks.addTask(task);
 
         ui.printLine("Got it. I've added this task:");
         ui.printLine("  " + task);
-        ui.printLine("Now you have " + tasks.size() + " in the list.");
+        ui.printLine("Now you have " + tasks.getNumTasks() + " in the list.");
 
         storage.save(tasks);
     }

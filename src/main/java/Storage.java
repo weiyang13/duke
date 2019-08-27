@@ -45,13 +45,15 @@ public class Storage {
                 }
 
             }
-            return tasks;
         } catch (FileNotFoundException e) {
             try {
                 file.createNewFile();
+                throw new DukeException("");
             } catch (IOException ex) {
                 throw new DukeException("");
             }
+        } finally {
+            return tasks;
         }
     }
 

@@ -12,12 +12,12 @@ public abstract class DatedTask extends Task {
         try {
             this.date = dateFormat.parse(date);
         } catch (ParseException e) {
-            throw new DukeException("Date must be of format dd/MM/yyyy HHmm");
+            throw new DukeException("Date must be of format dd/MM/yyyy HHmm.");
         }
     }
 
     @Override
     public String getDate() {
-        return dateFormat.format(by);
+        return dateFormat.format(date);
     }
 }

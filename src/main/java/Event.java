@@ -9,6 +9,6 @@ class Event extends DatedTask {
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + dateFormat.format(at) + ")";
+        return super.toString() + " (at: " + dateFormat.format(date) + ")";
     }
 }

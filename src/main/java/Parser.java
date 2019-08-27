@@ -1,50 +1,112 @@
 public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
-        String command = input.nextLine();
-        String[] commandTokens = command.split(" ");
-        if (command.equals("bye")) {
+        String[] commandTokens = fullCommand.split(" ");
+        if (fullCommand.equals("bye")) {
             return new ExitCommand();
-        } else if (command.equals("list")) {
+        } else if (fullCommand.equals("list")) {
             return new ListCommand();
         } else {
             switch (commandTokens[0]) {
             case "done":
-                if (commandTokens.length != 2) {
-                    throw new DukeException("'done' command must be followed by an integer.")
-                }
-                try {
-                    int itemNo = Integer.parseInt(commandTokens[1]);
-                    return new DoneCommand(itemNo);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("'done' must be followed by an integer.");
-                }
-                break;
+                return parseDone(commandTokens);
             case "delete":
-                if (commandTokens.length != 2) {
-                    throw new DukeException("'delete' command must be followed by an integer.")
-                }
-                try {
-                    int itemNo = Integer.parseInt(commandTokens[1]);
-                    return new DeleteCommand(itemNo);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("'delete' must be followed by an integer.");
-                }
-                break;
+                return parseDelete(commandTokens);
             case "todo":
-                addToDo(commandTokens);
-                save();
-                break;
+                return parseToDo(commandTokens);
             case "deadline":
-                addDeadline(commandTokens);
-                save();
-                break;
+                return parseDeadline(commandTokens);
             case "event":
-                addEvent(commandTokens);
-                save();
-                break;
+                return parseEvent(commandTokens);
             default:
-                throw new DukeException("OOPS!! Sorry, I do not know what that means :(");
+                throw new DukeException("Sorry, I do not know what that means.");
             }
         }
+    }
+
+    public static Command parseDone(String[] commandTokens) throws DukeException {
+        if (commandTokens.length != 2) {
+            throw new DukeException("'done' command must be followed by an integer.");
+        }
+        try {
+            int itemNo = Integer.parseInt(commandTokens[1]);
+            return new DoneCommand(itemNo);
+        } catch (NumberFormatException e) {
+            throw new DukeException("'done' must be followed by an integer.");
+        }
+    }
+
+    public static Command parseDelete(String[] commandTokens) throws DukeException {
+        if (commandTokens.length != 2) {
+            throw new DukeException("'delete' command must be followed by an integer.");
+        }
+        try {
+            int itemNo = Integer.parseInt(commandTokens[1]);
+            return new DeleteCommand(itemNo);
+        } catch (NumberFormatException e) {
+            throw new DukeException("'delete' must be followed by an integer.");
+        }
+    }
+
+    public static Command parseDeadline(String[] commandTokens) throws DukeException {
+        if (commandTokens.length == 1 || commandTokens[1].equals("/by")) {
+            throw new DukeException("Description for deadline must not be empty.");
+        }
+
+        String description = "";
+        int i;
+        for (i = 1; i < commandTokens.length; i++) {
+            if (commandTokens[i].equals("/by")) {
+                break;
+            }
+            description += commandTokens[i] + " ";
+        }
+        description = description.substring(0, description.length() - 1);
+
+        if (i == commandTokens.length) {
+            throw new DukeException("Indicate date/time for deadline with '/by'.");
+        } else if (commandTokens.length != i + 3) {
+            throw new DukeException("Date must be of format dd/MM/yyyy HHmm.");
+        }
+        String by = commandTokens[i + 1] + " " + commandTokens[i + 2];
+
+        return new AddDeadlineCommand(description, by);
+    }
+
+    public static Command parseEvent(String[] commandTokens) throws DukeException {
+        if (commandTokens.length == 1 || commandTokens[1].equals("/at")) {
+            throw new DukeException("Description for deadline must not be empty.");
+        }
+
+        String description = "";
+        int i;
+        for (i = 1; i < commandTokens.length; i++) {
+            if (commandTokens[i].equals("/at")) {
+                break;
+            }
+            description += commandTokens[i] + " ";
+        }
+        description = description.substring(0, description.length() - 1);
+
+        if (i == commandTokens.length) {
+            throw new DukeException("Indicate date/time for event with '/at'.");
+        } else if (commandTokens.length != i + 3) {
+            throw new DukeException("Date must be of format dd/MM/yyyy HHmm.");
+        }
+        String at = commandTokens[i + 1] + " " + commandTokens[i + 2];
+
+        return new AddEventCommand(description, at);
+    }
+
+    public static Command parseToDo(String[] commandTokens) throws DukeException {
+        if (commandTokens.length == 1) {
+            throw new DukeException("Description for todo must not be empty.");
+        }
+
+        String description = "";
+        for (int i = 1; i < commandTokens.length; i++) {
+            description += commandTokens[i] + " ";
+        }
+        description = description.substring(0, description.length() - 1);
+        return new AddToDoCommand(description);
     }
 }

@@ -11,15 +11,15 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskNumber > tasks.getNumTasks()) {
-            throw new DukeException("You have less than " + taskNumber " tasks.");
+            throw new DukeException("You have less than " + taskNumber + " tasks.");
         }
 
-        Task task = tasks.getTask(itemNo - 1);
-        tasks.deleteTask(itemNo - 1);
+        Task task = tasks.getTask(taskNumber);
+        tasks.deleteTask(taskNumber);
 
         ui.printLine("Noted. I've removed this task:");
         ui.printLine("  " + task);
-        ui.printLine("Now you have " + tasks.size() + " tasks in the list.");
+        ui.printLine("Now you have " + tasks.getNumTasks() + " tasks in the list.");
 
         storage.save(tasks);
     }

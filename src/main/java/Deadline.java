@@ -9,6 +9,6 @@ class Deadline extends DatedTask {
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + dateFormat.format(by) + ")";
+        return super.toString() + " (by: " + dateFormat.format(date) + ")";
     }
 }
