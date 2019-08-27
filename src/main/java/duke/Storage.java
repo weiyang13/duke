@@ -12,13 +12,29 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulates the unit that manages storage of data of the task list managed by Duke.
+ */
+
 public class Storage {
+    /** File to which data of the list of tasks is saved and loaded from. */
     private File file;
 
+    /**
+     * Initializes a storage object.
+     *
+     * @param filePath Pathname of the file used for storing data.
+     */
     public Storage(String filePath) {
         file = new File(filePath);
     }
 
+    /**
+     * Loads data from file into an ArrayList containing tasks.
+     *
+     * @return An ArrayList of tasks represented by data in the file.
+     * @throws DukeException If error in loading occurs.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -64,6 +80,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves data managed by taskList into the file
+     *
+     * @param taskList TaskList object managing list of tasks.
+     * @throws DukeException If there is an error in saving.
+     */
     public void save(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);

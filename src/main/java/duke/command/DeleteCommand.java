@@ -6,9 +6,19 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Encapsulates a command that deletes a task from the list of tasks.
+ */
 public class DeleteCommand extends Command {
+    /** Index of task to be deleted. */
     private int taskNumber;
 
+    /**
+     * Initializes a DeleteCommand object.
+     *
+     * @param taskNumber Index of task to be deleted.
+     * @throws DukeException If taskNumber is non-positive.
+     */
     public DeleteCommand(int taskNumber) throws DukeException {
         if (taskNumber < 1) {
             throw new DukeException("Task number must be positive.");
@@ -16,6 +26,17 @@ public class DeleteCommand extends Command {
         this.taskNumber = taskNumber;
     }
 
+    /**
+     * Executes a command to delete a task.
+     * Deletes a task from the list of tasks.
+     * Prints a message to the user indicating successful task deletion.
+     * Saves the updated list through Storage.
+     *
+     * @param tasks List of tasks kept tracked of by Duke.
+     * @param ui Unit that manages user interface of Duke.
+     * @param storage Unit that manages saved data of Duke.
+     * @throws DukeException If taskNumber is larger than number of tasks.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskNumber > tasks.getNumTasks()) {

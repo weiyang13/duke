@@ -2,11 +2,23 @@ package duke;
 
 import duke.command.Command;
 
+/**
+ * Encapsulates chatbot 'Duke'. Contains main method for chatbot
+ */
+
 public class Duke {
+    /** Unit that manages saved data of task list. */
     private Storage storage;
+    /** List of tasks tracked by Duke. */
     private TaskList tasks;
+    /** Unit that manages user interface of Duke. */
     private Ui ui;
 
+    /**
+     * Initializes a Duke object.
+     *
+     * @param filePath Pathname of the file used for storing data.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the chatbot.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -36,6 +51,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Creates the chatbot and runs it.
+     *
+     * @param args Command line arguments (unused).
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
