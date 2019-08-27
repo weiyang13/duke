@@ -1,7 +1,11 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.text.ParseException;
 import java.util.Date;
 
-class Deadline extends DatedTask {
+public class Deadline extends DatedTask {
     public Deadline (String description, String by) throws DukeException {
         super(description, by);
         taskType = TaskType.DEADLINE;

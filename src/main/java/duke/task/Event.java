@@ -1,7 +1,11 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.text.ParseException;
 import java.util.Date;
 
-class Event extends DatedTask {
+public class Event extends DatedTask {
     public Event (String description, String at) throws DukeException {
         super(description, at);
         taskType = TaskType.EVENT;

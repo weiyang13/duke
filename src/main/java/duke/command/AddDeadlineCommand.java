@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.task.Deadline;
+import duke.task.Task;
+
 public class AddDeadlineCommand extends AddTaskCommand {
     private String dateString;
 

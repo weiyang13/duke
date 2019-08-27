@@ -1,6 +1,8 @@
+package duke.task;
+
 import java.text.SimpleDateFormat;
 
-abstract class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected boolean hasDate;

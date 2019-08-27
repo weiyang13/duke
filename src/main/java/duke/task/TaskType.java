@@ -1,4 +1,6 @@
-enum TaskType {
+package duke.task;
+
+public enum TaskType {
     TO_DO('T'),
     DEADLINE('D'),
     EVENT('E');

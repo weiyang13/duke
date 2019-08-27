@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.task.Event;
+import duke.task.Task;
+
 public class AddEventCommand extends AddTaskCommand {
     private String dateString;
 
