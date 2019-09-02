@@ -22,9 +22,6 @@ public class AddDeadlineCommand extends AddTaskCommand {
         this.dateString = date;
     }
 
-    /**
-     * (@inheritDoc)
-     */
     @Override
     public Task createTask() throws DukeException {
         return new Deadline(description, dateString);

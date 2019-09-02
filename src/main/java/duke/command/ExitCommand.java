@@ -20,9 +20,6 @@ public class ExitCommand extends Command {
         ui.printLine("Bye. Hope to see you again soon!");
     }
 
-    /**
-     * (@inheritDoc)
-     */
     @Override
     public boolean isExit() {
         return true;

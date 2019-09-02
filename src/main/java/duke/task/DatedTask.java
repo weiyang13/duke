@@ -10,7 +10,7 @@ import java.util.Date;
  * Encapsulates a Task that is associated with a date.
  */
 public abstract class DatedTask extends Task {
-    /** Date associated with the task */
+    /** Date associated with the task. */
     protected Date date;
     /** Format of date and time for input and output (dd/MM/yyyy HHmm). */
     protected static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
@@ -32,9 +32,6 @@ public abstract class DatedTask extends Task {
         }
     }
 
-    /**
-     * (@inheritDoc)
-     */
     @Override
     public String getDate() {
         return dateFormat.format(date);
