@@ -66,6 +66,8 @@ public class Storage {
                     }
                     tasks.add(task);
                     break;
+                default :
+                    break;
                 }
 
             }
@@ -82,7 +84,7 @@ public class Storage {
     }
 
     /**
-     * Saves data managed by taskList into the file
+     * Saves data managed by taskList into the file.
      *
      * @param taskList TaskList object managing list of tasks.
      * @throws DukeException If there is an error in saving.

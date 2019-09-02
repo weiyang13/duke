@@ -17,9 +17,6 @@ public class AddToDoCommand extends AddTaskCommand {
         super(description);
     }
 
-    /**
-     * (@inheritDoc)
-     */
     @Override
     public Task createTask() throws DukeException {
         return new ToDo(description);

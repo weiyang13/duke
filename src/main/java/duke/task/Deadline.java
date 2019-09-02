@@ -17,14 +17,11 @@ public class Deadline extends DatedTask {
      * @param by Due date and time of task.
      * @throws DukeException If date and time format of by is incorrect.
      */
-    public Deadline (String description, String by) throws DukeException {
+    public Deadline(String description, String by) throws DukeException {
         super(description, by);
         taskType = TaskType.DEADLINE;
     }
 
-    /**
-     * (@inheritDoc)
-     */
     @Override
     public String toString() {
         return super.toString() + " (by: " + dateFormat.format(date) + ")";

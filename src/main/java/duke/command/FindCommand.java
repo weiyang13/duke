@@ -30,7 +30,7 @@ public class FindCommand extends Command {
      * @param tasks List of tasks kept tracked of by Duke.
      * @param ui Unit that manages user interface of Duke.
      * @param storage Unit that manages saved data of Duke.
-     * @throws DukeException
+     * @throws DukeException If there are no tasks, are no matching tasks tracked by Duke.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

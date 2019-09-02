@@ -22,9 +22,6 @@ public class AddEventCommand extends AddTaskCommand {
         dateString = date;
     }
 
-    /**
-     * (@inheritDoc)
-     */
     @Override
     public Task createTask() throws DukeException {
         return new Event(description, dateString);

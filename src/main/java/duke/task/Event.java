@@ -16,14 +16,11 @@ public class Event extends DatedTask {
      * @param at Date and time the event occurs at.
      * @throws DukeException If date and time format of at is wrong.
      */
-    public Event (String description, String at) throws DukeException {
+    public Event(String description, String at) throws DukeException {
         super(description, at);
         taskType = TaskType.EVENT;
     }
 
-    /**
-     * (@inheritDoc)
-     */
     @Override
     public String toString() {
         return super.toString() + " (at: " + dateFormat.format(date) + ")";

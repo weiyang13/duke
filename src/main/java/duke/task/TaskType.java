@@ -11,11 +11,11 @@ public enum TaskType {
     /** TaskType for Event Tasks. */
     EVENT('E');
 
-    /** Symbol associated with a particular TaskType */
+    /** Symbol associated with a particular TaskType. */
     private char typeSymbol;
 
     /**
-     * Constructor for TaskType objects
+     * Constructor for TaskType objects.
      *
      * @param typeSymbol Symbol associated with the TaskType.
      */
