@@ -46,12 +46,9 @@ public class Ui {
      * @param string String containing response of chatbot.
      */
     public void printLine(String string) {
-        System.out.println("response1 is: " + response);
         if (!response.equals("")) {
             response += "\n";
         }
-        System.out.println("screw you: " + response);
         response += string;
-        System.out.println("yay? " + response);
     }
 }
