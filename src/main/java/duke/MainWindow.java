@@ -35,7 +35,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke duke) {
+    /**
+     * Sets and initializes the chatbot.
+     *
+     * @param duke Chatbot to be run.
+     */
+    public void initializeDuke(Duke duke) {
         this.duke = duke;
         String greetings = duke.initialize();
         dialogContainer.getChildren().add(
@@ -62,15 +67,17 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * From stackoverflow
+     * Closes the terminal after a delay.
      */
     private void exit() {
+        // Code obtained from stackoverflow. A simple Thread.sleep() would not work.
         Task<Void> sleeper = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
+                    return null;
                 }
                 return null;
             }

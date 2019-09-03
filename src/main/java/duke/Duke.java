@@ -25,9 +25,14 @@ public class Duke {
     private TaskList tasks;
     /** Unit that manages user interface of Duke. */
     private Ui ui;
+    /** Filepath for storage file. */
     private String filePath = "data/tasks.txt";
 
-
+    /**
+     * Initializes the chatbot.
+     *
+     * @return String containing welcome message.
+     */
     public String initialize() {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -40,7 +45,12 @@ public class Duke {
         return ui.greet(false);
     }
 
-
+    /**
+     * Returns the response given by the chatbot given input command.
+     *
+     * @param input Input command of user.
+     * @return Response by chatbot.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
