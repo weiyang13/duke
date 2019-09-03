@@ -76,4 +76,7 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
+    public String getResponse(String input) {
+        return "";
+    }
 }
