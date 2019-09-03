@@ -8,41 +8,27 @@ import java.util.Scanner;
 
 public class Ui {
     /** Scanner object that receives user input. */
-    private Scanner input;
+    private String response;
 
     /**
      * Initializes a Ui object.
      */
     public Ui() {
-        input = new Scanner(System.in);
+        response = "";
     }
 
-    /**
-     * Prints an error message for when a loading error occurs.
-     */
-    public void showLoadingError() {
-        System.out.println("LOADING ERROR. Creating new storage file.");
+    public String flush() {
+        String buffer = response;
+        response = "";
+        return buffer;
     }
 
-    /**
-     * Prints a welcome message. To be called when Duke starts to run.
-     */
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        printLine("Hello! I'm Duke!");
-        printLine("What can I do for you?");
-    }
-
-    /**
-     * Prints a line to separate user input and chatbot responses.
-     */
-    public void showLine() {
-        System.out.println("    ______________________________________________________________________");
+    public String greet(boolean hasLoadingError) {
+        if (hasLoadingError) {
+            return "Hello, fellow citizen. It appears your tea has spilled. I'll get Jeeves to prepare a new cup.";
+        } else {
+            return "Hello, fellow citizen. Have you had your cup of tea?";
+        }
     }
 
     /**
@@ -50,7 +36,7 @@ public class Ui {
      *
      * @param message String containing details of error.
      */
-    public void showError(String message) {
+    public void addError(String message) {
         printLine("OOPS!!! " + message + " :( :(");
     }
 
@@ -60,15 +46,12 @@ public class Ui {
      * @param string String containing response of chatbot.
      */
     public void printLine(String string) {
-        System.out.println("     " + string);
-    }
-
-    /**
-     * Reads next line of user input.
-     *
-     * @return String containing user input, ending with newline character.
-     */
-    public String readCommand() {
-        return input.nextLine();
+        System.out.println("response1 is: " + response);
+        if (!response.equals("")) {
+            response += "\n";
+        }
+        System.out.println("screw you: " + response);
+        response += string;
+        System.out.println("yay? " + response);
     }
 }
