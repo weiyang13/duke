@@ -36,7 +36,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        checkForEmptyTaskList();
+        checkForEmptyTaskList(tasks, ui);
         searchTaskList(tasks, ui);
         checkIfNoTasksFound(ui);
     }
