@@ -47,7 +47,7 @@ public abstract class AddTaskCommand extends Command {
      * @param ui Unit that manages user interface of Duke.
      * @param task Task added to TaskList of Duke.
      */
-    public void printMessage(Ui ui, Task task) {
+    private void printMessage(Ui ui, Task task) {
         ui.printLine("Got it. I've added this task:");
         ui.printLine("  " + task);
         ui.printLine("Now you have " + tasks.getNumTasks() + " in the list.");
@@ -60,5 +60,5 @@ public abstract class AddTaskCommand extends Command {
      * @return Task created by the command.
      * @throws DukeException If date associated with command is of wrong format.
      */
-    public abstract Task createTask() throws DukeException;
+    protected abstract Task createTask() throws DukeException;
 }
