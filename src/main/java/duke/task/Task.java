@@ -127,9 +127,9 @@ public abstract class Task implements Comparable<Task> {
     @Override
     public int compareTo(Task other) {
         if (other.isDone && !this.isDone) {
-            return 1;
-        } else if (!other.isDone && this.isDone) {
             return -1;
+        } else if (!other.isDone && this.isDone) {
+            return 1;
         } else if (other.hasDate) {
             return 1;
         } else {

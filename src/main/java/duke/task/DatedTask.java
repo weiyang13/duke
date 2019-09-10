@@ -50,9 +50,9 @@ public abstract class DatedTask extends Task {
     @Override
     public int compareTo(Task other) {
         if (other.isDone && !this.isDone) {
-            return 1;
-        } else if (!other.isDone && this.isDone) {
             return -1;
+        } else if (!other.isDone && this.isDone) {
+            return 1;
         } else if (!other.hasDate) {
             return -1;
         } else if (this.date.compareTo(((DatedTask) other).date) != 0) {
