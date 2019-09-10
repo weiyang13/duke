@@ -48,6 +48,13 @@ public class TaskList {
     }
 
     /**
+     * Sorts the tasks in list of tasks based on natural order of tasks.
+     */
+    public void sortTasks() {
+        tasks.sort(null);
+    }
+
+    /**
      * Retrieves a task (based on index) from list of tasks.
      *
      * @param taskNumber Index of task to be retrieved.

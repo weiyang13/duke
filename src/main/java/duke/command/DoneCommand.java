@@ -43,6 +43,7 @@ public class DoneCommand extends Command {
         checkValidTaskNumber(tasks, ui);
         checkTaskNotDone(tasks, ui);
         setTaskAsDone(tasks, ui);
+        tasks.sortTasks();
         storage.save(tasks);
     }
 
