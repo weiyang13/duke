@@ -41,6 +41,12 @@ public abstract class AddTaskCommand extends Command {
         storage.save(tasks);
     }
 
+    /**
+     * Prints message indicating task completion.
+     *
+     * @param ui Unit that manages user interface of Duke.
+     * @param task Task added to TaskList of Duke.
+     */
     public void printMessage(Ui ui, Task task) {
         ui.printLine("Got it. I've added this task:");
         ui.printLine("  " + task);
