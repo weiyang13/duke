@@ -45,6 +45,7 @@ public class DeleteCommand extends Command {
 
         Task task = tasks.getTask(taskNumber);
         tasks.deleteTask(taskNumber);
+        assert tasks.getTask(taskNumber) != task : "Exact instance of task object should have been removed.";
 
         ui.printLine("Noted. I've removed this task:");
         ui.printLine("  " + task);
