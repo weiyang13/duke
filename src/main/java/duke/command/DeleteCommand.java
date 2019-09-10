@@ -39,18 +39,47 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        checkValidTaskNumber(tasks, ui);
+        deleteTask(tasks, ui);
+        storage.save(tasks);
+    }
+
+    /**
+     * Throws an exception if the task number is invalid.
+     *
+     * @param tasks List of tasks kept tracked of by Duke.
+     * @param ui Unit that manages user interface of Duke.
+     * @throws DukeException If task number is greater than number of tasks.
+     */
+    private void checkValidTaskNumber(TaskList tasks, Ui ui) throws DukeException {
         if (taskNumber > tasks.getNumTasks()) {
             throw new DukeException("You have less than " + taskNumber + " tasks.");
         }
+    }
 
+    /**
+     * Deletes specified task and prints a message.
+     *
+     * @param tasks List of tasks kept tracked of by Duke.
+     * @param ui Unit that manages user interface of Duke.
+     */
+    private void deleteTask(TaskList tasks, Ui ui) {
         Task task = tasks.getTask(taskNumber);
         tasks.deleteTask(taskNumber);
         assert tasks.getTask(taskNumber) != task : "Exact instance of task object should have been removed.";
+        printMessage(tasks, ui, task);
+    }
 
+    /**
+     * Prints a message indicating successful task deletion.
+     *
+     * @param tasks List of tasks kept tracked of by Duke.
+     * @param ui Unit that manages user interface of Duke.
+     * @param task Task to be deleted.
+     */
+    private void printMessage(TaskList tasks, Ui ui, Task task) {
         ui.printLine("Noted. I've removed this task:");
         ui.printLine("  " + task);
         ui.printLine("Now you have " + tasks.getNumTasks() + " tasks in the list.");
-
-        storage.save(tasks);
     }
 }
