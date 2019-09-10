@@ -43,6 +43,7 @@ public class TaskList {
      * @param taskNumber Index of task to be deleted.
      */
     public void deleteTask(int taskNumber) {
+        assert taskNumber <= getNumTasks() && taskNumber > 0 : "Task number should be valid";
         tasks.remove(taskNumber - 1);
     }
 
@@ -53,6 +54,7 @@ public class TaskList {
      * @return Task retrieved with corresponding index.
      */
     public Task getTask(int taskNumber) {
+        assert taskNumber <= getNumTasks() && taskNumber > 0 : "Task number should be valid";
         return tasks.get(taskNumber - 1);
     }
 
