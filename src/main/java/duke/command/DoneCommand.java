@@ -55,5 +55,6 @@ public class DoneCommand extends Command {
 
             storage.save(tasks);
         }
+        assert task.getIsDone() : "Task should now be marked as done";
     }
 }
