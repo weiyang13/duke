@@ -38,6 +38,7 @@ public abstract class AddTaskCommand extends Command {
         Task task = createTask();
         tasks.addTask(task);
         printMessage(tasks, ui, task);
+        tasks.sortTasks();
         storage.save(tasks);
     }
 
