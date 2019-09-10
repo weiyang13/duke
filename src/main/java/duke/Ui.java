@@ -37,9 +37,9 @@ public class Ui {
      */
     public String greet(boolean hasLoadingError) {
         if (hasLoadingError) {
-            return "Hello, fellow citizen. It appears your tea has spilled. I'll get Jeeves to prepare a new cup.";
+            return "Hello, fellow citizen. I am Duke, your task manager.";
         } else {
-            return "Hello, fellow citizen. Have you had your cup of tea?";
+            return "Welcome back, fellow citizen.";
         }
     }
 
