@@ -37,13 +37,16 @@ public abstract class AddTaskCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = createTask();
         tasks.addTask(task);
+        printMessage(ui, task);
+        storage.save(tasks);
+    }
 
+    public void printMessage(Ui ui, Task task) {
         ui.printLine("Got it. I've added this task:");
         ui.printLine("  " + task);
         ui.printLine("Now you have " + tasks.getNumTasks() + " in the list.");
-
-        storage.save(tasks);
     }
+
 
     /**
      * Returns the task to be created by the command.
