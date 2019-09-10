@@ -74,6 +74,7 @@ public class Parser {
         if (commandTokens.length != 2) {
             throw new DukeException("'done' command must be followed by an integer.");
         }
+
         try {
             int itemNo = Integer.parseInt(commandTokens[1]);
             return new DoneCommand(itemNo);
@@ -93,6 +94,7 @@ public class Parser {
         if (commandTokens.length != 2) {
             throw new DukeException("'delete' command must be followed by an integer.");
         }
+
         try {
             int itemNo = Integer.parseInt(commandTokens[1]);
             return new DeleteCommand(itemNo);

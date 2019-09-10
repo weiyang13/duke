@@ -37,13 +37,23 @@ public abstract class AddTaskCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = createTask();
         tasks.addTask(task);
+        printMessage(tasks, ui, task);
+        storage.save(tasks);
+    }
 
+    /**
+     * Prints message indicating task completion.
+     *
+     * @param tasks List of tasks kept tracked of by Duke.
+     * @param ui Unit that manages user interface of Duke.
+     * @param task Task added to TaskList of Duke.
+     */
+    private void printMessage(TaskList tasks, Ui ui, Task task) {
         ui.printLine("Got it. I've added this task:");
         ui.printLine("  " + task);
         ui.printLine("Now you have " + tasks.getNumTasks() + " in the list.");
-
-        storage.save(tasks);
     }
+
 
     /**
      * Returns the task to be created by the command.
@@ -51,5 +61,5 @@ public abstract class AddTaskCommand extends Command {
      * @return Task created by the command.
      * @throws DukeException If date associated with command is of wrong format.
      */
-    public abstract Task createTask() throws DukeException;
+    protected abstract Task createTask() throws DukeException;
 }
