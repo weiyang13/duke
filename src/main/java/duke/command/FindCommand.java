@@ -12,6 +12,7 @@ import duke.task.Task;
 public class FindCommand extends Command {
     /** Keyword to be searched for. */
     private String keyword;
+    private int taskCount;
 
     /**
      * Initializes a FindCommand object.
@@ -20,6 +21,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(String keyword) {
         this.keyword = keyword;
+        this.taskCount = 0;
     }
 
     /**
@@ -34,24 +36,69 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        int numTasks = tasks.getNumTasks();
-        int taskCount = 0;
+        checkForEmptyTaskList();
+        searchTaskList(tasks, ui);
+        checkIfNoTasksFound(ui);
+    }
 
-        if (numTasks == 0) {
+    /**
+     * Throws an exception if there are no tasks in the TaskList.
+     *
+     * @param tasks List of tasks kept tracked of by Duke.
+     * @param ui Unit that manages user interface of Duke.
+     * @throws DukeException If there are no tasks
+     */
+    private void checkForEmptyTaskList(TaskList tasks, Ui ui) throws DukeException {
+        if (tasks.getNumTasks() == 0) {
             throw new DukeException("There are no tasks in the list.");
         }
+    }
 
-        for (int i = 1; i <= numTasks; i++) {
+    /**
+     * Searches the tasklist for tasks that match the keyword and prints the task.
+     *
+     * @param tasks List of tasks kept tracked of by Duke.
+     * @param ui Unit that manages user interface of Duke.
+     */
+    private void searchTaskList(TaskList tasks, Ui ui) {
+        for (int i = 1; i <= tasks.getNumTasks(); i++) {
             Task task = tasks.getTask(i);
-            if (task.containsKeyword(keyword)) {
-                taskCount++;
-                if (taskCount == 1) {
-                    ui.printLine("Here are the matching tasks in your list:");
-                }
-                ui.printLine(taskCount +  "." + task);
-            }
+            printIfMatch(task, ui);
         }
+    }
 
+    /**
+     * Prints a task if it has a keyword. Also prints a message for the first task found.
+     *
+     * @param task Task to be checked
+     * @param ui Unit that manages user interface of Duke.
+     */
+    private void printIfMatch(Task task, Ui ui) {
+        if (task.containsKeyword(keyword)) {
+            printFirstLine(ui);
+            ui.printLine(taskCount +  "." + task);
+            taskCount++;
+        }
+    }
+
+    /**
+     * Prints a message indicating there are matching task(s).
+     *
+     * @param ui Unit that manages user interface of Duke.
+     */
+    private void printFirstLine(Ui ui) {
+        if (taskCount == 0) {
+            ui.printLine("Here are the matching tasks in your list:");
+        }
+    }
+
+    /**
+     * Throws an exception if no tasks are found.
+     *
+     * @param ui Unit that manages user interface of Duke.
+     * @throws DukeException If no tasks are found.
+     */
+    private void checkIfNoTasksFound(Ui ui) throws DukeException {
         if (taskCount == 0) {
             throw new DukeException("No task with keyword '" + keyword + "' found.");
         }
