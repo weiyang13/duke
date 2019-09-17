@@ -75,9 +75,9 @@ public class FindCommand extends Command {
      */
     private void printIfMatch(Task task, Ui ui) {
         if (task.containsKeyword(keyword)) {
+            taskCount++;
             printFirstLine(ui);
             ui.printLine(taskCount +  "." + task);
-            taskCount++;
         }
     }
 
