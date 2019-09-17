@@ -70,7 +70,8 @@ public class MainWindow extends AnchorPane {
      * Closes the terminal after a delay.
      */
     private void exit() {
-        // Code obtained from stackoverflow. A simple Thread.sleep() would not work.
+        // @@author weiyang13-reused
+        // Segment of code adapted from https://stackoverflow.com/a/26454506
         Task<Void> sleeper = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -89,5 +90,6 @@ public class MainWindow extends AnchorPane {
             }
         });
         new Thread(sleeper).start();
+        // @@author
     }
 }
