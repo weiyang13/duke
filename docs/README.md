@@ -1,5 +1,7 @@
 # User Guide
 
+![Logo](Ui.png)
+
 ## Features 
 
 ### Personalised chatbot
