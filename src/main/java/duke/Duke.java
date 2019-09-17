@@ -26,7 +26,7 @@ public class Duke {
     /** Unit that manages user interface of Duke. */
     private Ui ui;
     /** Filepath for storage file. */
-    private String filePath = "data/tasks.txt";
+    private String filePath = "tasks.txt";
 
     /**
      * Initializes the chatbot.
