@@ -52,7 +52,7 @@ public abstract class AddTaskCommand extends Command {
     private void printMessage(TaskList tasks, Ui ui, Task task) {
         ui.printLine("Got it. I've added this task:");
         ui.printLine("  " + task);
-        ui.printLine("Now you have " + tasks.getNumTasks() + " in the list.");
+        ui.printLine("Now you have " + tasks.getNumTasks() + " tasks in the list.");
     }
 
 
