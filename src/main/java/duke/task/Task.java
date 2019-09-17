@@ -103,7 +103,7 @@ public abstract class Task implements Comparable<Task> {
     public boolean containsKeyword(String keyword) {
         String[] tokens = description.split(" ");
         for (String token : tokens) {
-            if (token.equals(keyword)) {
+            if (token.toUpperCase().equals(keyword.toUpperCase())) {
                 return true;
             }
         }
