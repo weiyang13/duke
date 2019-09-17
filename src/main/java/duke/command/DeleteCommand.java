@@ -80,6 +80,6 @@ public class DeleteCommand extends Command {
     private void printMessage(TaskList tasks, Ui ui, Task task) {
         ui.printLine("Noted. I've removed this task:");
         ui.printLine("  " + task);
-        ui.printLine("Now you have " + tasks.getNumTasks() + " tasks in the list.");
+        ui.printLine("Now you have " + tasks.getNumTasks() + " task(s) in the list.");
     }
 }
